@@ -49,6 +49,12 @@ const icons = [
     url: "https://13832.fullstack.clarusway.com/admin",
   },
 ];
+const iconStyle = {
+  color: "#eee",
+  "& .MuiSvgIcon-root": { color: "#eee" },
+  "&:hover": { color: "red" },
+  "&:hover .MuiSvgIcon-root": { color: "red" },
+};
 
 const MenuListItems = () => {
   const navigate = useNavigate();
@@ -57,10 +63,19 @@ const MenuListItems = () => {
       <List>
         {icons?.map((item, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => navigate(item.url)}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
+            {item.url.includes("http") && (
+              <ListItemButton to={item.url} sx={iconStyle}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            )}
+
+            {!item.url.includes("http") && (
+              <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            )}
           </ListItem>
         ))}
       </List>
