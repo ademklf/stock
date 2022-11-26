@@ -1,12 +1,6 @@
-import { useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
+import React from "react";
 
-const Firms = () => {
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const BASE_URL = "https://13832.fullstack.clarusway.com/";
+const useStockCalls = () => {
   const getFirms = async () => {
     const url = "firms";
     dispatch(fetchStart());
@@ -23,12 +17,7 @@ const Firms = () => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    getFirms();
-  }, []);
-
-  return <div>Firms</div>;
+  return <div>useStockCalls</div>;
 };
 
-export default Firms;
+export default useStockCalls;
