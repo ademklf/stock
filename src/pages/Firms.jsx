@@ -8,7 +8,9 @@ const Firms = () => {
   const getFirms = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}stock/firms/`, {
-        headers: { Authorization: `Token ${token}` },
+        headers: {
+          Authorization: `Token ${token}`,
+        } /*He GET işleminde Authorization içerisinde Token göndermemiz gereklidir.*/,
       });
       console.log(data);
     } catch (error) {
