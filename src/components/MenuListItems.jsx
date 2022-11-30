@@ -46,9 +46,10 @@ const icons = [
   {
     title: "Admin Panel",
     icon: <SupervisorAccountIcon />,
-    url: "https://13832.fullstack.clarusway.com/admin",
+    url: "https://10001.fullstack.clarusway.com/admin",
   },
 ];
+
 const iconStyle = {
   color: "#eee",
   "& .MuiSvgIcon-root": { color: "#eee" },
