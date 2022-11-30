@@ -4,20 +4,21 @@ import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
 const useStockCalls = () => {
   const dispatch = useDispatch();
-  const getFirms = async () => {
-    const url = "firms";
+
+  const getStockData = async (url) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken.get(`stock/firms/`);
-      console.log(data);
+      const { data } = await axiosWithToken.get(`stock/${url}/`);
       dispatch(getSuccess({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
     }
   };
+  const getFirms = async () => getStockData("firms");
+  const getSales = async () => getStockData("sales");
 
-  return { getFirms };
+  return { getFirms, getSales };
 };
 
 export default useStockCalls;

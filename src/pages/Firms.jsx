@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 // import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
 const Firms = () => {
-  const { getFirms } = useStockCalls();
+  const { getFirms, getSales } = useStockCalls();
   // const dispatch = useDispatch();
 
   // const { getFirms } = useStockCalls();
@@ -34,6 +34,7 @@ const Firms = () => {
 
   useEffect(() => {
     getFirms();
+    getSales();
   }, []);
 
   return <div>Firms</div>;
