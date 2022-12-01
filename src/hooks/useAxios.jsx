@@ -17,7 +17,7 @@ const useAxios = () => {
     headers: { Authorization: `Token ${token}` },
   });
 
-  return axiosWithToken;
+  return { axiosWithToken };
 };
 
 export default useAxios;
