@@ -7,10 +7,14 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { ButtonBase } from "@mui/material";
+import FirmCard from "../components/FirmCard";
+
 // import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
 const Firms = () => {
   const { getFirms, getSales } = useStockCalls();
+  const { firms } = useSelector((state) => state.stock);
   // const dispatch = useDispatch();
 
   // const { getFirms } = useStockCalls();
@@ -34,10 +38,27 @@ const Firms = () => {
 
   useEffect(() => {
     getFirms();
-    getSales();
   }, []);
 
-  return <div>Firms</div>;
+  return (
+    <Box>
+      <Typography variant="h4" color="error" mb={4}>
+        Firms
+      </Typography>
+
+      <Button variant="contained">New Firm</Button>
+
+      {firms?.length > 0 && (
+        <Grid container>
+          {firms?.map((item) => (
+            <Grid item>
+              <FirmCard />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Box>
+  );
 };
 
 export default Firms;
