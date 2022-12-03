@@ -9,12 +9,15 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { ButtonBase } from "@mui/material";
 import FirmCard from "../components/FirmCard";
+import FirmModal from "../components/modals/FirmModal";
 
 // import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
 const Firms = () => {
   const { getFirms, getSales } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+
   // const dispatch = useDispatch();
 
   // const { getFirms } = useStockCalls();
@@ -47,6 +50,8 @@ const Firms = () => {
       </Typography>
 
       <Button variant="contained">New Firm</Button>
+
+      <FirmModal open={open} setOpen={setOpen} />
 
       {firms?.length > 0 && (
         <Grid container justifyContent="center" gap={3}>
