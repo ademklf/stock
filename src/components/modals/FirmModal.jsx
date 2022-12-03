@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { modalStyle } from "../../styles/globalStyle";
 
-export default function FirmModal({ open, setopen }) {
+export default function FirmModal({ open, setOpen }) {
   return (
     <div>
       <Modal
         open={open}
-        onClose={() => setopen(false)}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
