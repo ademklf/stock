@@ -13,3 +13,9 @@ export const modalStyle = {
   boxShadow: 24,
   p: 4,
 };
+export const flexCenter = {
+  display: "flex",
+  flexDirection: "column ",
+  justifyContent: "center",
+  gap: 2,
+};

@@ -17,6 +17,12 @@ const Firms = () => {
   const { getFirms, getSales } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    image: "",
+  });
 
   // const dispatch = useDispatch();
 
@@ -53,7 +59,7 @@ const Firms = () => {
         New Firm
       </Button>
 
-      <FirmModal open={open} setOpen={setOpen} />
+      <FirmModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
 
       {firms?.length > 0 && (
         <Grid container justifyContent="center" gap={3}>
