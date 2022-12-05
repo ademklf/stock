@@ -8,6 +8,7 @@ import useStockCalls from "../../hooks/useStockCalls";
 
 export default function FirmModal({ open, setOpen, info, setInfo }) {
   const { postFirm, putFirm } = useStockCalls();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (info.id) {
@@ -19,6 +20,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
     setOpen(false);
     setInfo({});
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
