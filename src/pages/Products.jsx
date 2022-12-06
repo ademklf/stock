@@ -12,7 +12,7 @@ import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/modals/FirmModal";
 
 const Firms = () => {
-  const { getFirms, getSales } = useStockCalls();
+  const { getBrands, getCategories, getProducts } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({
@@ -23,7 +23,9 @@ const Firms = () => {
   });
 
   useEffect(() => {
-    getFirms();
+    getBrands();
+    getCategories();
+    getProducts();
   }, []);
 
   return (
@@ -36,12 +38,12 @@ const Firms = () => {
         New Product
       </Button>
 
-      <ProductModal
+      {/* <ProductModal
         open={open}
         setOpen={setOpen}
         info={info}
         setInfo={setInfo}
-      />
+      /> */}
 
       {firms?.length > 0 && (
         <Grid container justifyContent="center" gap={3}>

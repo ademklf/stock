@@ -20,6 +20,9 @@ const useStockCalls = () => {
   };
   const getFirms = async () => getStockData("firms");
   const getSales = async () => getStockData("sales");
+  const getCategories = async () => getStockData("categories");
+  const getBrands = async () => getStockData("brands");
+  const getProducts = async () => getStockData("products");
 
   //!-----------------DELETE CALLS---------------!//
   const deleteStockData = async (url, id) => {
@@ -67,6 +70,9 @@ const useStockCalls = () => {
     getStockData,
     getFirms,
     getSales,
+    getCategories,
+    getBrands,
+    getProducts,
     deleteFirm,
     postFirm,
     postStockData,
