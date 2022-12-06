@@ -18,6 +18,7 @@ const useStockCalls = () => {
       console.log(error);
     }
   };
+
   const getFirms = async () => getStockData("firms");
   const getSales = async () => getStockData("sales");
   const getCategories = async () => getStockData("categories");
@@ -71,8 +72,8 @@ const useStockCalls = () => {
     getFirms,
     getSales,
     getCategories,
-    getBrands,
     getProducts,
+    getBrands,
     deleteFirm,
     postFirm,
     postStockData,

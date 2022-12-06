@@ -10,23 +10,39 @@ import Grid from "@mui/material/Grid";
 import { ButtonBase } from "@mui/material";
 import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/modals/FirmModal";
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
+import { arrowStyle, btnHoverStyle, flexCenter } from "../styles/globalStyle";
 
 const Firms = () => {
   const { getBrands, getCategories, getProducts } = useStockCalls();
-  const { firms } = useSelector((state) => state.stock);
+  const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
-  });
+  const [info, setInfo] = useState({});
 
+  const [toggle, setToggle] = useState({
+    brand: false,
+    name: false,
+    stock: 1,
+  });
   useEffect(() => {
     getBrands();
     getCategories();
     getProducts();
   }, []);
+
+  const handleSortNumber = (arg) => {
+    setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
+  };
 
   return (
     <Box>
@@ -45,19 +61,61 @@ const Firms = () => {
         setInfo={setInfo}
       /> */}
 
-      {firms?.length > 0 && (
-        <Grid container justifyContent="center" gap={3}>
-          {firms?.map((firm) => (
-            <Grid item>
-              <FirmCard
-                key={firm.id}
-                firm={firm}
-                setOpen={setOpen}
-                setInfo={setInfo}
-              />
-            </Grid>
-          ))}
-        </Grid>
+      {products?.length > 0 && (
+        <TableContainer component={Paper} sx={{ mt: 3 }} elevation={10}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">#</TableCell>
+                <TableCell align="center">Category</TableCell>
+                <TableCell align="center">
+                  <Box sx={arrowStyle}>
+                    <div>Brand</div>
+                    {true && <UpgradeIcon />}
+                    {false && <VerticalAlignBottomIcon />}
+                  </Box>
+                </TableCell>
+                <TableCell align="center">
+                  <Box sx={arrowStyle}>
+                    <div>Name</div>
+                    {true && <UpgradeIcon />}
+                    {false && <VerticalAlignBottomIcon />}
+                  </Box>
+                </TableCell>
+                <TableCell align="center">
+                  <Box
+                    sx={arrowStyle}
+                    ocClick={() => handleSortNumber("stock")}
+                  >
+                    <div>Stock</div>
+                    {toggle.stock === 1 && <UpgradeIcon />}
+                    {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
+                  </Box>
+                </TableCell>
+                <TableCell align="center">Operation</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product, index) => (
+                <TableRow
+                  key={product.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell align="center">{product.category}</TableCell>
+                  <TableCell align="center">{product.brand}</TableCell>
+                  <TableCell align="center">{product.name}</TableCell>
+                  <TableCell align="center">{product.stock}</TableCell>
+                  <TableCell align="center">
+                    <DeleteIcon sx={btnHoverStyle} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </Box>
   );
