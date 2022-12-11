@@ -31,7 +31,7 @@ const Firms = () => {
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
   const [selectedBrands, setSelectedBrands] = useState([]);
-
+  const [selectedProducts, setSelectedProducts] = useState([]);
   useEffect(() => {
     getBrands();
     getCategories();
@@ -51,7 +51,9 @@ const Firms = () => {
 
   const isBrandSelected = (item) =>
     selectedBrands.includes(item.brand) || selectedBrands.lenght === 0;
-
+  const filtredProducts = products
+    ?.filter((item) => selectedBrands?.includes(item.brand))
+    .map((item) => item.name);
   // //? Siralancak local state (sutun verilerinin local state hali)
   // const [sortedProducts, setSortedProducts] = useState(products);
 
@@ -98,18 +100,29 @@ const Firms = () => {
         New Product
       </Button>
 
-      <MultiSelectBox
-        handleSelect={(item) => setSelectedBrands(item)}
-        placeholder="Select Brand"
-      >
-        {brands?.map((item) => (
-          <MultiSelectBoxItem
-            key={item.name}
-            value={item.name}
-            text={item.name}
-          />
-        ))}
-      </MultiSelectBox>
+      <Box sx={flexCenter} mt={3}>
+        <MultiSelectBox
+          handleSelect={(item) => setSelectedBrands(item)}
+          placeholder="Select Brand"
+        >
+          {brands?.map((item) => (
+            <MultiSelectBoxItem
+              key={item.name}
+              value={item.name}
+              text={item.name}
+            />
+          ))}
+        </MultiSelectBox>
+
+        <MultiSelectBox
+          handleSelect={(item) => setSelectedProducts(item)}
+          placeholder="Select Product Name"
+        >
+          {filtredProducts?.map((item) => (
+            <MultiSelectBoxItem key={item} value={item} text={item} />
+          ))}
+        </MultiSelectBox>
+      </Box>
 
       {/* <ProductModal
         open={open}
