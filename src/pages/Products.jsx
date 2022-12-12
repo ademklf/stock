@@ -26,18 +26,24 @@ import useSortColumn from "../hooks/useSortColumn";
 import { MultiSelectBox, MultiSelectBoxItem } from "@tremor/react";
 
 const Firms = () => {
-  const { getBrands, getCategories, getProducts, deleteProduct } =
-    useStockCalls();
+  const {
+    getBrands,
+    getCategories,
+    getProducts,
+    deleteProduct,
+    getProCatBrands,
+  } = useStockCalls();
   const { products, brands } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   useEffect(() => {
-    getBrands();
-    getCategories();
-    getProducts();
-  }, []);
+    // getBrands();
+    // getCategories();
+    // getProducts();
+    getProCatBrands();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const columnObj = {
     brand: 1,
