@@ -24,15 +24,10 @@ import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
 import { arrowStyle, btnHoverStyle, flexCenter } from "../styles/globalStyle";
 import useSortColumn from "../hooks/useSortColumn";
 import { MultiSelectBox, MultiSelectBoxItem } from "@tremor/react";
+import ProductModal from "../components/modals/ProductModal";
 
 const Firms = () => {
-  const {
-    getBrands,
-    getCategories,
-    getProducts,
-    deleteProduct,
-    getProCatBrands,
-  } = useStockCalls();
+  const { deleteProduct, getProCatBrands } = useStockCalls();
   const { products, brands } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
@@ -108,6 +103,13 @@ const Firms = () => {
       <Button variant="contained" onClick={() => setOpen(true)}>
         New Product
       </Button>
+
+      <ProductModal
+        open={open}
+        setOpen={setOpen}
+        info={info}
+        setInfo={setInfo}
+      />
 
       <Box sx={flexCenter} mt={3}>
         <MultiSelectBox
