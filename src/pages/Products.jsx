@@ -26,7 +26,8 @@ import useSortColumn from "../hooks/useSortColumn";
 import { MultiSelectBox, MultiSelectBoxItem } from "@tremor/react";
 
 const Firms = () => {
-  const { getBrands, getCategories, getProducts } = useStockCalls();
+  const { getBrands, getCategories, getProducts, deleteProduct } =
+    useStockCalls();
   const { products, brands } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
@@ -189,7 +190,10 @@ const Firms = () => {
                     <TableCell align="center">{product.brand}</TableCell>
                     <TableCell align="center">{product.name}</TableCell>
                     <TableCell align="center">{product.stock}</TableCell>
-                    <TableCell align="center">
+                    <TableCell
+                      align="center"
+                      onClick={() => deleteProduct(product.id)}
+                    >
                       <DeleteIcon sx={btnHoverStyle} />
                     </TableCell>
                   </TableRow>
