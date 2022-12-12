@@ -51,6 +51,8 @@ const Firms = () => {
 
   const isBrandSelected = (item) =>
     selectedBrands.includes(item.brand) || selectedBrands.lenght === 0;
+  const isProductSelected = (item) =>
+    selectedProducts.includes(item.name) || selectedProducts.lenght === 0;
   const filtredProducts = products
     ?.filter((item) => selectedBrands?.includes(item.brand))
     .map((item) => item.name);
@@ -174,6 +176,7 @@ const Firms = () => {
             <TableBody>
               {sortedData
                 ?.filter((item) => isBrandSelected(item))
+                .filter((item) => isProductSelected(item))
                 .map((product, index) => (
                   <TableRow
                     key={product.name}
