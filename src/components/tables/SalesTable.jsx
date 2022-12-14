@@ -11,11 +11,12 @@ import UpgradeIcon from "@mui/icons-material/Upgrade";
 import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+
+import useSortColumn from "../../hooks/useSortColumn";
+import { arrowStyle, btnHoverStyle, flex } from "../../styles/globalStyle";
+import useStockCalls from "../../hooks/useStockCalls";
 import { useSelector } from "react-redux";
 import { Typography } from "@mui/material";
-import useSortColumn from "../hooks/useSortColumn";
-import useStockCalls from "../hooks/useStockCalls";
-import { arrowStyle, btnHoverStyle, flex } from "../styles/globalStyle";
 
 const SalesTable = ({ setOpen, setInfo, selectedProducts, selectedBrands }) => {
   const { deleteSale } = useStockCalls();
