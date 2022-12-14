@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import useStockCalls from "../hooks/useStockCalls";
-
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { ButtonBase } from "@mui/material";
 import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/modals/FirmModal";
+import { flexCenter } from "../styles/globalStyle";
+import { useSelector } from "react-redux";
 
 // import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
@@ -17,12 +15,7 @@ const Firms = () => {
   const { getFirms, getSales } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
-  });
+  const [info, setInfo] = useState({});
 
   // const dispatch = useDispatch();
 
@@ -47,7 +40,7 @@ const Firms = () => {
 
   useEffect(() => {
     getFirms();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box>
@@ -55,22 +48,23 @@ const Firms = () => {
         Firms
       </Typography>
 
-      <Button variant="contained" onClick={() => setOpen(true)}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          setInfo({});
+          setOpen(true);
+        }}
+      >
         New Firm
       </Button>
 
       <FirmModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
 
       {firms?.length > 0 && (
-        <Grid container justifyContent="center" gap={3}>
+        <Grid container sx={flexCenter} mt={3}>
           {firms?.map((firm) => (
-            <Grid item>
-              <FirmCard
-                key={firm.id}
-                firm={firm}
-                setOpen={setOpen}
-                setInfo={setInfo}
-              />
+            <Grid item key={firm.id}>
+              <FirmCard firm={firm} setOpen={setOpen} setInfo={setInfo} />
             </Grid>
           ))}
         </Grid>

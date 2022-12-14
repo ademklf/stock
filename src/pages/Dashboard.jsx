@@ -12,7 +12,7 @@ import MenuListItems from "../components/MenuListItems";
 import { blueGrey } from "@mui/material/colors";
 import useAuthCalls from "../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 const drawerWidth = 200;
@@ -116,7 +116,7 @@ function Dashboard(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box
+      <Container
         component="main"
         sx={{
           flexGrow: 1,
@@ -126,7 +126,7 @@ function Dashboard(props) {
       >
         <Toolbar />
         <Outlet />
-      </Box>
+      </Container>
     </Box>
   );
 }
