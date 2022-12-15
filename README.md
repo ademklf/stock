@@ -1,3 +1,5 @@
+# https://ademklf.github.io/stock/
+
 # Redux Toolkit Ornegi
 
 ## `Kurulum`
